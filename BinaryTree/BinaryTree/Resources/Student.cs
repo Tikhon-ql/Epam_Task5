@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BinaryTree.Resources
+namespace MyBinaryTree.Resources
 {
     [Serializable]
     public class Student:IComparable

@@ -1,0 +1,6 @@
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\bin\Debug\BinaryTree.dll
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\bin\Debug\BinaryTree.pdb
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\obj\Debug\MyBinaryTree.csprojAssemblyReference.cache
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\obj\Debug\MyBinaryTree.csproj.CoreCompileInputs.cache
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\obj\Debug\BinaryTree.dll
+D:\Тихон\Git\Epam_Task5\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb

@@ -12,13 +12,18 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace BinaryTree
+namespace MyBinaryTree
 {
     public class BinaryTree<T>: IEnumerable<T> where T : IComparable
     {
         public int Count { get; set; }
         public TreeNode<T> Root { get; set; }
 
+        public BinaryTree(params T[] data)
+        {
+            foreach (T item in data)
+                Add(item);
+        }
         public object Current => this;
 
         public bool Add(T data)
@@ -52,12 +57,17 @@ namespace BinaryTree
             }
             else
             {
-                if (node.Right == null)
+                if (data.CompareTo(node.Data) > 0)
                 {
-                    node.Right = new TreeNode<T>(data);
+                    if (node.Right == null)
+                    {
+                        node.Right = new TreeNode<T>(data);
+                    }
+                    else
+                        AddTo(node.Right, data);
                 }
                 else
-                    AddTo(node.Right, data);
+                    throw new Exception();
             }
         }
         public bool Serialize(string filename)
@@ -207,9 +217,9 @@ namespace BinaryTree
                 return null;
 
             TreeNode<T> right = FindMin(node.Right);
-            TreeNode<T> left= FindMin(node.Left);
+            TreeNode<T> left = FindMin(node.Left);
 
-            if(node.CompareTo(left.Data) > 0)
+            if (node.CompareTo(left.Data) > 0)
             {
                 if (node.CompareTo(right.Data) > 0)
                     return node;
@@ -309,7 +319,7 @@ namespace BinaryTree
                 BalanceBinaryTree(midle + 1,max,list);
             }
         }
-        public void FillList(TreeNode<T> node,ICollection<TreeNode<T>> list)
+        private void FillList(TreeNode<T> node,ICollection<TreeNode<T>> list)
         {
             if(node != null)
             {

@@ -8,3 +8,7 @@ D:\Тихон\Авы\Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.C
 D:\Тихон\Авы\Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
 D:\Тихон\Авы\Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 D:\Тихон\Авы\Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+D:\Тихон\Git\Epam_Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+D:\Тихон\Git\Epam_Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\Тихон\Git\Epam_Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+D:\Тихон\Git\Epam_Task5\BinaryTree\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
