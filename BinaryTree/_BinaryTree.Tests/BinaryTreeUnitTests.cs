@@ -9,8 +9,12 @@ namespace _BinaryTree.Tests
     [TestClass]
     public class BinaryTreeUnitTests
     {
-        [TestMethod]
+        /// <summary>
+        /// Checking add method
+        /// </summary>
+        /// <param name="student"></param>
         [DynamicData(nameof(TestMethodAdd),DynamicDataSourceType.Method)]
+        [DataTestMethod]
         public void Add_Student_Method_Test(Student student)
         {
             //arrange
@@ -20,15 +24,26 @@ namespace _BinaryTree.Tests
             //assert
             Assert.IsTrue(actual);
         }
-        private static IEnumerable<Student> TestMethodAdd()
+        /// <summary>
+        /// Getting data for add test method
+        /// </summary>
+        /// <returns></returns>
+        
+        private static IEnumerable<Student[]> TestMethodAdd()
         {
-            yield return new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5);
-            yield return new Student("Сидоров", "Тест1", new DateTime(2012, 11, 10), 7);
-            yield return new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6);
+            return new[]
+            {
+                new Student[] { new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) },
+                new Student[] { new Student("Сидоров", "Тест1", new DateTime(2012, 11, 10), 7) },
+                new Student[] { new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6) }
+            };
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Checking remove method
+        /// </summary>
+        /// <param name="student"></param>
         [DynamicData(nameof(TestMethodRemove),DynamicDataSourceType.Method)]
+        [DataTestMethod]
         public void Remove_Student_Method_Test(Student student)
         {
             //arrange
@@ -38,15 +53,25 @@ namespace _BinaryTree.Tests
             //assert
             Assert.IsTrue(actual);
         }
-
-        private static IEnumerable<Student> TestMethodRemove()
+        /// <summary>
+        ///  Getting data for remove test method
+        /// </summary>
+        /// <returns></returns>
+      
+        private static IEnumerable<Student[]> TestMethodRemove()
         {
-            yield return new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5);
-            yield return new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6);
+            return new[]
+            {
+                new Student[] { new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) },
+                new Student[] { new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6) }
+            };
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Checking serach method
+        /// </summary>
+        /// <param name="student"></param>
         [DynamicData(nameof(TestMethodSearch),DynamicDataSourceType.Method)]
+        [DataTestMethod]
         public void Search_Student_Method_Test(Student student)
         {
             //arrange
@@ -57,14 +82,24 @@ namespace _BinaryTree.Tests
             //assert
             Assert.AreEqual(expected, actual);
         }
-        private static IEnumerable<Student> TestMethodSearch()
+        /// <summary>
+        /// Getting data for  test method
+        /// </summary>
+        /// <returns></returns>
+     
+        private static IEnumerable<Student[]> TestMethodSearch()
         {
-            yield return new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5);
-            yield return new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6);
+            return new[]
+            {
+                new Student[] { new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) },
+                new Student[] { new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6) }
+            };
         }
-
+        /// <summary>
+        /// Checking balance binary tree method
+        /// </summary>
         [TestMethod]
-        public void Balance_BinaryTree_Methode_Test(Student student)
+        public void Balance_BinaryTree_Methode_Test()
         {
             //arrange
             BinaryTree<Student> tree = new BinaryTree<Student>(new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5), new Student("Смирнов", "Тест1", new DateTime(2010, 10, 10), 6), new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 8));
@@ -76,6 +111,30 @@ namespace _BinaryTree.Tests
 
             //assert
             Assert.AreEqual(expected,tree);
+        }
+        [DynamicData(nameof(TestMethodSerializeAndDesirealize), DynamicDataSourceType.Method)]
+        [DataTestMethod]
+        public void Serialize_and_Deserialize_BinaryTree(object students)
+        {
+            //arrange
+            List<Student> studs = students as List<Student>;
+            BinaryTree<Student> expected = new BinaryTree<Student>(studs.ToArray());
+            BinaryTree<Student> actual = new BinaryTree<Student>();
+            //act
+            bool ser = expected.Serialize("test.xml");
+            bool des = actual.Deserialize("test.xml");
+            //assert
+            Assert.AreEqual(expected,actual);
+            Assert.IsTrue(ser);
+            Assert.IsTrue(des);
+        }
+        private static IEnumerable<object[]> TestMethodSerializeAndDesirealize()
+        {
+            return new[]
+            {
+                new object[] { new List<Student> { new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5), new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) } },
+                new object[] { new List<Student> { new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6), new Student("Птренко", "Тест1", new DateTime(2010, 8, 4), 7) } }
+            };
         }
     }
 }

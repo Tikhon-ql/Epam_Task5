@@ -10,21 +10,26 @@ using System.Xml.Serialization;
 
 namespace MyBinaryTree
 {
+    //Binary tree node class
     public class TreeNode<T>:IComparable<T> where T : IComparable
     {
+        /// <summary>
+        /// Left node
+        /// </summary>
         public TreeNode<T> Left { get; set; }
+        /// <summary>
+        /// Right node
+        /// </summary>
         public TreeNode<T> Right { get; set; }
-        public int Height { get; set; }
+        /// <summary>
+        /// Node's data
+        /// </summary>
         public T Data { get; set; }
         public TreeNode()
         {
 
         }
         public TreeNode(T data)
-        {
-            Data = data;
-        }
-        public TreeNode(T data,TreeNode<T> parent)
         {
             Data = data;
         }

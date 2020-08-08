@@ -16,7 +16,13 @@ namespace MyBinaryTree
 {
     public class BinaryTree<T>: IEnumerable<T> where T : IComparable
     {
+        /// <summary>
+        /// Node's count
+        /// </summary>
         public int Count { get; set; }
+        /// <summary>
+        /// Tree's root
+        /// </summary>
         public TreeNode<T> Root { get; set; }
 
         public BinaryTree(params T[] data)
@@ -24,8 +30,11 @@ namespace MyBinaryTree
             foreach (T item in data)
                 Add(item);
         }
-        public object Current => this;
-
+        /// <summary>
+        /// Adding node method
+        /// </summary>
+        /// <param name="data">Node's data</param>
+        /// <returns></returns>
         public bool Add(T data)
         {
             try
@@ -70,6 +79,11 @@ namespace MyBinaryTree
                     throw new Exception();
             }
         }
+        /// <summary>
+        /// Serializeing tree method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public bool Serialize(string filename)
         {
             try
@@ -88,7 +102,11 @@ namespace MyBinaryTree
                 return false;
             }
         }
-
+        /// <summary>
+        /// Filling list by tree node data method
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="list"></param>
         private void FillTreeNodeDataInList(TreeNode<T> node, List<T> list)
         {
             if (node != null)
@@ -98,7 +116,11 @@ namespace MyBinaryTree
                 FillTreeNodeDataInList(node.Right, list);
             }
         }
-
+        /// <summary>
+        /// Deserializeing tree method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public bool Deserialize(string filename)
         {
             try
@@ -116,7 +138,10 @@ namespace MyBinaryTree
                 return false;
             }
         }
-
+        /// <summary>
+        /// Adding list method
+        /// </summary>
+        /// <param name="list"></param>
         private void AddRange(List<T> list)
         {
             foreach(T item in list)
@@ -124,7 +149,11 @@ namespace MyBinaryTree
                 Add(item);
             }
         }
-
+        /// <summary>
+        /// Remove tree node method
+        /// </summary>
+        /// <param name="data">Remove data</param>
+        /// <returns></returns>
         public bool Remove(T data)
         {
             try
@@ -234,17 +263,22 @@ namespace MyBinaryTree
                     return right;
             }
         }
+        /// <summary>
+        /// Searching data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public T Search(T data)
         { 
             TreeNode<T> current = Root;
             while (current != null)
             {
                 int res = current.CompareTo(data);
-                if (res < 0)
+                if (res > 0)
                     current = current.Left;
                 else
                 {
-                    if (res > 0)
+                    if (res < 0)
                         current = current.Right;
                     else
                         break;
@@ -284,21 +318,12 @@ namespace MyBinaryTree
 
         public IEnumerator<T> GetEnumerator()
         {
-            //InOrder(Root);
-            //return null;
             throw new NotImplementedException();
         }
 
-
-        public void InOrder(TreeNode<T> node)
-        {
-            if(node != null)
-            {
-                InOrder(node.Left);
-                InOrder(node.Right);
-            }
-        }
-
+        /// <summary>
+        /// Balancing binary tree
+        /// </summary>
         public void Balance()
         {
             List<TreeNode<T>> list = new List<TreeNode<T>>();
@@ -319,6 +344,11 @@ namespace MyBinaryTree
                 BalanceBinaryTree(midle + 1,max,list);
             }
         }
+        /// <summary>
+        /// Filling list by tree nodes
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="list">List</param>
         private void FillList(TreeNode<T> node,ICollection<TreeNode<T>> list)
         {
             if(node != null)
@@ -328,6 +358,10 @@ namespace MyBinaryTree
                 FillList(node.Right,list);
             }
         }
+        /// <summary>
+        /// Remove all tree nodes
+        /// </summary>
+        /// <param name="list"></param>
         private void RemoveAll(List<TreeNode<T>> list)
         {
             foreach(TreeNode<T> item in list)
@@ -341,21 +375,20 @@ namespace MyBinaryTree
         {
             throw new NotImplementedException();
         }
-        //public T GetElement(int index)
-        //{
-        //    if (index < Count)
-        //    {
-        //        TreeNode<T> tmp = Root;
-        //        for(int i = 0; i < Count; i++)
-        //        {
-        //            if(i != index)
-        //            {
-        //                tmp 
-        //            }
-        //        }
-        //    }
-        //    else
-        //        throw new IndexOutOfRangeException();
-        //}
+        private bool IsEquals(TreeNode<T> node1,TreeNode<T> node2)
+        {
+            if(node1 != null && node2 != null)
+            {
+                if (!node1.Data.Equals(node2.Data))
+                    return false;
+                IsEquals(node1.Left,node2.Left);
+                IsEquals(node1.Right, node2.Right);
+            }
+            return true;
+        }
+        public override bool Equals(object obj)
+        {
+            return IsEquals(Root, ((BinaryTree<T>)obj).Root);
+        }
     }
 }

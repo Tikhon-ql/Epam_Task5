@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <Surname>Петров</Surname>
+    <TestName>Тест1</TestName>
+    <Date>2008-09-11T00:00:00</Date>
+    <Mark>6</Mark>
+  </Student>
+  <Student>
+    <Surname>Птренко</Surname>
+    <TestName>Тест1</TestName>
+    <Date>2010-08-04T00:00:00</Date>
+    <Mark>7</Mark>
+  </Student>
+</ArrayOfStudent>

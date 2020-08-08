@@ -31,5 +31,24 @@ namespace MyBinaryTree.Resources
         {
             return Mark - ((Student)obj).Mark;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj is Student student &&
+                   Surname == student.Surname &&
+                   TestName == student.TestName &&
+                   Date == student.Date &&
+                   Mark == student.Mark;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 412176061;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Surname);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TestName);
+            hashCode = hashCode * -1521134295 + Date.GetHashCode();
+            hashCode = hashCode * -1521134295 + Mark.GetHashCode();
+            return hashCode;
+        }
     }
 }
