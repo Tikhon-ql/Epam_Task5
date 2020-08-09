@@ -79,6 +79,7 @@ namespace MyBinaryTree
                     throw new Exception();
             }
         }
+
         /// <summary>
         /// Serializeing tree method
         /// </summary>
@@ -89,7 +90,7 @@ namespace MyBinaryTree
             try
             {
                 List<T> list = new List<T>();
-                FillTreeNodeDataInList(Root, list);
+                FillListByTreeNodeData(Root, list);
                 XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
                 using (StreamWriter writer = new StreamWriter(filename))
                 {
@@ -107,13 +108,13 @@ namespace MyBinaryTree
         /// </summary>
         /// <param name="node"></param>
         /// <param name="list"></param>
-        private void FillTreeNodeDataInList(TreeNode<T> node, List<T> list)
+        private void FillListByTreeNodeData(TreeNode<T> node, List<T> list)
         {
             if (node != null)
             {
-                FillTreeNodeDataInList(node.Left, list);
+                FillListByTreeNodeData(node.Left, list);
                 list.Add(node.Data);
-                FillTreeNodeDataInList(node.Right, list);
+                FillListByTreeNodeData(node.Right, list);
             }
         }
         /// <summary>
@@ -388,7 +389,19 @@ namespace MyBinaryTree
         }
         public override bool Equals(object obj)
         {
-            return IsEquals(Root, ((BinaryTree<T>)obj).Root);
+            List<T> list1 = new List<T>();
+            List<T> list2 = new List<T>();
+            FillListByTreeNodeData(Root, list1);
+            FillListByTreeNodeData(((BinaryTree<T>)obj).Root, list2);
+            return list1.SequenceEqual(list2);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1823673881;
+            hashCode = hashCode * -1521134295 + Count.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<TreeNode<T>>.Default.GetHashCode(Root);
+            return hashCode;
         }
     }
 }

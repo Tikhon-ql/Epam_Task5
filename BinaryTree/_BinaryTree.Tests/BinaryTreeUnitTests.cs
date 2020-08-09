@@ -112,6 +112,10 @@ namespace _BinaryTree.Tests
             //assert
             Assert.AreEqual(expected,tree);
         }
+        /// <summary>
+        /// Checking serialize and desirialize binary tree method
+        /// </summary>
+        /// <param name="students"></param>
         [DynamicData(nameof(TestMethodSerializeAndDesirealize), DynamicDataSourceType.Method)]
         [DataTestMethod]
         public void Serialize_and_Deserialize_BinaryTree(object students)
@@ -132,7 +136,7 @@ namespace _BinaryTree.Tests
         {
             return new[]
             {
-                new object[] { new List<Student> { new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5), new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) } },
+                new object[] { new List<Student> { new Student("Сидоров", "Тест1", new DateTime(2010, 8, 7), 2), new Student("Иванов", "Тест1", new DateTime(2010, 10, 10), 5) } },
                 new object[] { new List<Student> { new Student("Петров", "Тест1", new DateTime(2008, 9, 11), 6), new Student("Птренко", "Тест1", new DateTime(2010, 8, 4), 7) } }
             };
         }
