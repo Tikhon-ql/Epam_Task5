@@ -1,17 +1,17 @@
 ﻿using MySerializer.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using MySerializer.Interfaces;
+using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+using System.Runtime.CompilerServices;
+using MySerializer.Abstract;
 
 namespace MySerializer.Models
 {
-    public class MySerializer<T>
+    public class MySerializer<T> where T:VersionHaver, ISerialize
     {
         public static bool Serialize(T data,string filename,SerializeType serializeType)
         {
@@ -42,7 +42,21 @@ namespace MySerializer.Models
                 return false;
             }
         }
+
+
+
         private static void SerializeInBinaryFile(T data, string filename)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(stream, data);
+            }
+        }
+
+
+
+        private static void SerializeInXmlFile(T data, string filename)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             using (StreamWriter writer = new StreamWriter(filename))
@@ -50,67 +64,95 @@ namespace MySerializer.Models
                 serializer.Serialize(writer, data);
             }
         }
-        private static void SerializeInXmlFile(T data, string filename)
-        {
 
-        }
+
+
         private static void SerializeInTextFileByJsonFormat(T data, string filename)
         {
-
-        }
-        public static bool Serialize(string filename, SerializeType serializeType,T data)
-        {
-            try
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            using(FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
             {
-                switch (serializeType)
+                serializer.WriteObject(stream, data);
+            }
+        }
+
+
+
+        public static T Serialize(string filename,Version currentVersion, SerializeType serializeType)
+        {
+            switch (serializeType)
+            {
+                case SerializeType.BinaryFile:
+                    {
+                        return DeserializeInBinaryFile(filename,currentVersion);
+                    }
+                case SerializeType.XmlFile:
+                    {
+                        return DeserializeInXmlFile(filename,currentVersion);
+                    }
+                case SerializeType.TextFileByJsonFormat:
+                    {
+                        return DeserializeInTextFileByJsonFormat(filename,currentVersion);
+                    }
+                default:
+                    throw new Exception();
+            }
+        }
+
+        private static T DeserializeInBinaryFile(string filename,Version version)
+        {
+            T data;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(filename, FileMode.Open))
+            {
+               data = (T)formatter.Deserialize(stream);
+               if(data.Version.Equals(version))
+               {
+                    return data;
+               }
+            }
+            throw new Exception("Несоответствие версий");
+        }
+
+
+
+        //private static T DeserializeInXmlFile(string filename,Version version)
+        //{
+        //    XmlSerializer serializer = new XmlSerializer(typeof(T));
+        //    using (StreamReader reader = new StreamReader(filename))
+        //    {
+        //        return (T)serializer.Deserialize(reader);
+        //    }
+        //}
+
+        private static T DeserializeInXmlFile(string filename, Version version)
+        {
+            T data;
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                data = (T)serializer.Deserialize(reader);
+                if (data.Version.Equals(version))
                 {
-                    case SerializeType.BinaryFile:
-                        {
-                            DeserializeInBinaryFile(filename,out data);
-                            break;
-                        }
-                    case SerializeType.XmlFile:
-                        {
-                            DeserializeInXmlFile(filename,out data);
-                            break;
-                        }
-                    case SerializeType.TextFileByJsonFormat:
-                        {
-                            DeserializeInTextFileByJsonFormat(filename,out data);
-                            break;
-                        }
+                    return data;
                 }
-                return true;
             }
-            catch
-            {
-                return false;
-            }
+            throw new Exception("Несоответствие версий");
         }
 
-        private static void DeserializeInBinaryFile(string filename,out T data)
+        private static T DeserializeInTextFileByJsonFormat(string filename,Version version)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StreamReader reader = new StreamReader(filename))
+            T data;
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            using (FileStream stream = new FileStream(filename,FileMode.Open))
             {
-                data = (T)serializer.Deserialize(reader);
+                data = (T)serializer.ReadObject(stream);
+                if (data.Version.Equals(version))
+                {
+                    return data;
+                }
             }
-        }
-        private static void DeserializeInXmlFile(string filename,out T data)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StreamReader reader = new StreamReader(filename))
-            {
-                data = (T)serializer.Deserialize(reader);
-            }
-        }
-        private static void DeserializeInTextFileByJsonFormat(string filename,out T data)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StreamReader reader = new StreamReader(filename))
-            {
-                data = (T)serializer.Deserialize(reader);
-            }
+            throw new Exception("Несоответствие версий");
         }
     }
 }
