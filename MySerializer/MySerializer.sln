@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySerializer", "MySerializer\MySerializer.csproj", "{CE7049EE-AC64-463F-A694-7B0E32FA85B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0E2DD7F8-8164-483C-BC70-7E4265CA32F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_MySerializer.Tests", "_MySerializer.Tests\_MySerializer.Tests.csproj", "{5071CE11-C934-4E2F-9345-9CB45C9C08B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{CE7049EE-AC64-463F-A694-7B0E32FA85B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7049EE-AC64-463F-A694-7B0E32FA85B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7049EE-AC64-463F-A694-7B0E32FA85B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5071CE11-C934-4E2F-9345-9CB45C9C08B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5071CE11-C934-4E2F-9345-9CB45C9C08B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5071CE11-C934-4E2F-9345-9CB45C9C08B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5071CE11-C934-4E2F-9345-9CB45C9C08B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5071CE11-C934-4E2F-9345-9CB45C9C08B9} = {0E2DD7F8-8164-483C-BC70-7E4265CA32F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8E6EB6A-D117-437E-BB52-4D8869CDF1BE}

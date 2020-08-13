@@ -8,6 +8,6 @@ namespace MySerializer.Abstract
 {
     public abstract class VersionHaver
     {
-        static Version Version { get; set; }
+       public Version Version { get; set; } = new Version("1.0.0.0");
     }
 }

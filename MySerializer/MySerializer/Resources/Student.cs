@@ -14,7 +14,6 @@ namespace MySerializer.Resources
         public string TestName { get; set; }
         public DateTime Date { get; set; }
         public int Mark { get; set; }
-        public static Version Version { get; set; }
 
         public Student() { }
         public Student(string surname, string testName, DateTime date, int mark)
