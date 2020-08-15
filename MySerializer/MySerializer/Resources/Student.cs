@@ -3,52 +3,51 @@ using MySerializer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MySerializer.Resources
 {
+    [Serializable]
     public class Student : VersionHaver, ISerialize
     {
         public string Surname { get; set; }
-        public string TestName { get; set; }
-        public DateTime Date { get; set; }
-        public int Mark { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
 
         public Student() { }
-        public Student(string surname, string testName, DateTime date, int mark)
+        public Student(string surname,string name,int age)
         {
             Surname = surname;
-            TestName = testName;
-            Date = date;
-            Mark = mark;
+            Name = name;
+            Age = age;
         }
         public override string ToString()
         {
-            return Surname + ";" + TestName + ";" + Date.ToShortDateString() + ";" + Mark.ToString();
+            return Surname + ";" + Name + ";" + Age.ToString();
         }
 
         public int CompareTo(object obj)
         {
-            return Mark - ((Student)obj).Mark;
+            return Age - ((Student)obj).Age;
         }
 
         public override bool Equals(object obj)
         {
             return obj != null && obj is Student student &&
                    Surname == student.Surname &&
-                   TestName == student.TestName &&
-                   Date == student.Date &&
-                   Mark == student.Mark;
+                   Name == student.Name &&
+                   Age == student.Age;
         }
 
         public override int GetHashCode()
         {
-            int hashCode = 412176061;
+            int hashCode = 1871828855;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Version>.Default.GetHashCode(Version);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Surname);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TestName);
-            hashCode = hashCode * -1521134295 + Date.GetHashCode();
-            hashCode = hashCode * -1521134295 + Mark.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + Age.GetHashCode();
             return hashCode;
         }
     }

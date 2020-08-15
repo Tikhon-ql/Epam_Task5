@@ -11,36 +11,37 @@ using MySerializer.Abstract;
 
 namespace MySerializer.Models
 {
-    public class MySerializer<T> where T:VersionHaver, ISerialize
+    public class Serializer<T> where T : VersionHaver, ISerialize
     {
-        public static bool Serialize(T data,string filename,SerializeType serializeType)
+        public static bool Serialize(T data, string filename, SerializeType serializeType)
         {
-            try
+            //try
+            //{
+            switch (serializeType)
             {
-                switch (serializeType)
-                {
-                    case SerializeType.BinaryFile:
-                        {
-                            SerializeInBinaryFile(data, filename);
-                            break;
-                        }
-                    case SerializeType.XmlFile:
-                        {
-                            SerializeInXmlFile(data, filename);
-                            break;
-                        }
-                    case SerializeType.TextFileByJsonFormat:
-                        {
-                            SerializeInTextFileByJsonFormat(data, filename);
-                            break;
-                        }
-                }
-                return true;
+                case SerializeType.BinaryFile:
+                    {
+                        SerializeInBinaryFile(data, filename);
+                        break;
+                    }
+                case SerializeType.XmlFile:
+                    {
+                        SerializeInXmlFile(data, filename);
+                        break;
+                    }
+                case SerializeType.TextFileByJsonFormat:
+                    {
+                        SerializeInTextFileByJsonFormat(data, filename);
+                        break;
+                    }
             }
-            catch
-            {
-                return false;
-            }
+            return true;
+        //}
+        //catch(Exception ex)
+        //{
+        //    string str = ex.GetType().Name.ToString();
+        //    return false;
+        //}
         }
 
         private static void SerializeInBinaryFile(T data, string filename)
@@ -76,13 +77,13 @@ namespace MySerializer.Models
 
 
 
-        public static T Serialize(string filename,Version currentVersion, SerializeType serializeType)
+        public static T Deserialize(string filename,Version currentVersion, SerializeType serializeType)
         {
             switch (serializeType)
             {
                 case SerializeType.BinaryFile:
                     {
-                        return DeserializeInBinaryFile(filename,currentVersion);
+                        return DeserializeInBinaryFile(filename, currentVersion);
                     }
                 case SerializeType.XmlFile:
                     {
@@ -104,7 +105,7 @@ namespace MySerializer.Models
             using (FileStream stream = new FileStream(filename, FileMode.Open))
             {
                data = (T)formatter.Deserialize(stream);
-               if(data.Version.Equals(version))
+               if(version == data.Version)
                {
                     return data;
                }
@@ -119,7 +120,7 @@ namespace MySerializer.Models
             using (StreamReader reader = new StreamReader(filename))
             {
                 data = (T)serializer.Deserialize(reader);
-                if (data.Version.Equals(version))
+                if (version == data.Version)
                 {
                     return data;
                 }
@@ -134,7 +135,7 @@ namespace MySerializer.Models
             using (FileStream stream = new FileStream(filename,FileMode.Open))
             {
                 data = (T)serializer.ReadObject(stream);
-                if (data.Version.Equals(version))
+                if (version == data.Version)
                 {
                     return data;
                 }

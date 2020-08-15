@@ -1,0 +1,9 @@
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\bin\Debug\MySerializer.dll
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\bin\Debug\MySerializer.pdb
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\bin\Debug\Newtonsoft.Json.dll
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\bin\Debug\Newtonsoft.Json.xml
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\obj\Debug\MySerializer.csprojAssemblyReference.cache
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\obj\Debug\MySerializer.csproj.CoreCompileInputs.cache
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\obj\Debug\MySerializer.csproj.CopyComplete
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\obj\Debug\MySerializer.dll
+D:\Тихон\Git\Epam_Task5\MySerializer\MySerializer\obj\Debug\MySerializer.pdb
