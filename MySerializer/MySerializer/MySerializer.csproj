@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\VersionHaver.cs" />
+    <Compile Include="Interfaces\IVersionHaver.cs" />
     <Compile Include="Enums\SerializeType.cs" />
     <Compile Include="Interfaces\ISerialize.cs" />
     <Compile Include="Models\Serializer.cs" />

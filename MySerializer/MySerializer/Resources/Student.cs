@@ -1,4 +1,4 @@
-﻿using MySerializer.Abstract;
+﻿
 using MySerializer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 namespace MySerializer.Resources
 {
     [Serializable]
-    public class Student : VersionHaver, ISerialize
+    [DataContract]
+    public class Student : IVersionHaver, ISerialize
     {
         public string Surname { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-
+        public Version Version { get; set; } = new Version("1.0.0.0");
         public Student() { }
         public Student(string surname,string name,int age)
         {

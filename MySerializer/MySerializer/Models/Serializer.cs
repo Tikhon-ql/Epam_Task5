@@ -7,11 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using System.Runtime.Serialization.Json;
 using System.Runtime.CompilerServices;
-using MySerializer.Abstract;
+using System.Runtime.Serialization;
 
 namespace MySerializer.Models
 {
-    public class Serializer<T> where T : VersionHaver, ISerialize
+    public class Serializer<T> where T : IVersionHaver, ISerialize
     {
         public static bool Serialize(T data, string filename, SerializeType serializeType)
         {
@@ -62,6 +62,7 @@ namespace MySerializer.Models
             {
                 serializer.Serialize(writer, data);
             }
+
         }
 
 
