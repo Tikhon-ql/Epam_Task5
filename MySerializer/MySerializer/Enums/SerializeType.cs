@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace MySerializer.Enums
 {
+    /// <summary>
+    /// Types of object's serialization
+    /// </summary>
     public enum SerializeType
     {
         BinaryFile,
         XmlFile,
-        TextFileByJsonFormat
+        JsonFile
     }
 }

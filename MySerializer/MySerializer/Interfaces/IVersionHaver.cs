@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MySerializer.Interfaces
 {
+    /// <summary>
+    /// Interface of version owner
+    /// </summary>
     public interface IVersionHaver
     {
        Version Version { get; set; } 

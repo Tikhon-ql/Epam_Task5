@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MySerializer.Interfaces
 {
+    /// <summary>
+    /// Interface-marker of serialization objects
+    /// </summary>
     public interface ISerialize
     {
     }

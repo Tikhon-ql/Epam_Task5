@@ -4,19 +4,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MySerializer.Models
 {
     [Serializable]
+    [DataContract]
     public class StudentsList : IVersionHaver, ICollection<Student>,ISerialize
     {
+        [DataMember]
         List<Student> students = new List<Student>();
         public int Count => students.Count;
 
         public bool IsReadOnly => false;
-
+        [DataMember]
         public Version Version { get; set; } = new Version("1.0.0.0");
 
         public void Add(Student item)
@@ -62,10 +65,10 @@ namespace MySerializer.Models
 
         public override bool Equals(object obj)
         {
-            return obj != null && obj is StudentsList list &&
-                   Version == list.Version &&
-                   students.SequenceEqual(list.students) &&
-                   Count == list.Count;
+            return obj != null && 
+                   Version == ((StudentsList)obj).Version &&
+                   students.SequenceEqual(((StudentsList)obj).students) &&
+                   Count == ((StudentsList)obj).Count;
         }
 
         public override int GetHashCode()

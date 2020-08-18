@@ -13,6 +13,13 @@ namespace MySerializer.Models
 {
     public class Serializer<T> where T : IVersionHaver, ISerialize
     {
+        /// <summary>
+        /// Object's serializing method
+        /// </summary>
+        /// <param name="data">Data</param>
+        /// <param name="filename"></param>
+        /// <param name="serializeType"></param>
+        /// <returns></returns>
         public static bool Serialize(T data, string filename, SerializeType serializeType)
         {
             //try
@@ -29,9 +36,9 @@ namespace MySerializer.Models
                         SerializeInXmlFile(data, filename);
                         break;
                     }
-                case SerializeType.TextFileByJsonFormat:
+                case SerializeType.JsonFile:
                     {
-                        SerializeInTextFileByJsonFormat(data, filename);
+                        SerializeInJsonFile(data, filename);
                         break;
                     }
             }
@@ -43,7 +50,11 @@ namespace MySerializer.Models
         //    return false;
         //}
         }
-
+        /// <summary>
+        /// Binary serializing method
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="filename"></param>
         private static void SerializeInBinaryFile(T data, string filename)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -54,20 +65,32 @@ namespace MySerializer.Models
         }
 
 
-
+        /// <summary>
+        /// Xml serializing method
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="filename"></param>
         private static void SerializeInXmlFile(T data, string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StreamWriter writer = new StreamWriter(filename))
+            //XmlSerializer serializer = new XmlSerializer(typeof(T));
+            //using (StreamWriter writer = new StreamWriter(filename))
+            //{
+            //    serializer.Serialize(writer, data);
+            //}
+            DataContractSerializer serializer = new DataContractSerializer(typeof(T));
+            using (FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
             {
-                serializer.Serialize(writer, data);
+                serializer.WriteObject(stream, data);
             }
-
         }
 
+        /// <summary>
+        /// Json serializing method
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="filename"></param>
 
-
-        private static void SerializeInTextFileByJsonFormat(T data, string filename)
+        private static void SerializeInJsonFile(T data, string filename)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
             using(FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
@@ -76,7 +99,13 @@ namespace MySerializer.Models
             }
         }
 
-
+        /// <summary>
+        /// Object's deserializing method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="currentVersion"></param>
+        /// <param name="serializeType"></param>
+        /// <returns></returns>
 
         public static T Deserialize(string filename,Version currentVersion, SerializeType serializeType)
         {
@@ -90,15 +119,21 @@ namespace MySerializer.Models
                     {
                         return DeserializeInXmlFile(filename,currentVersion);
                     }
-                case SerializeType.TextFileByJsonFormat:
+                case SerializeType.JsonFile:
                     {
-                        return DeserializeInTextFileByJsonFormat(filename,currentVersion);
+                        return DeserializeInJsonFile(filename,currentVersion);
                     }
                 default:
                     throw new Exception();
             }
         }
 
+        /// <summary>
+        /// Binary deserializing method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
         private static T DeserializeInBinaryFile(string filename,Version version)
         {
             dynamic data = null;
@@ -114,13 +149,19 @@ namespace MySerializer.Models
             throw new Exception("Несоответствие версий");
         }
 
+        /// <summary>
+        /// Xml deserializing method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
         private static T DeserializeInXmlFile(string filename, Version version)
         {
             dynamic data = null;
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StreamReader reader = new StreamReader(filename))
+            DataContractSerializer serializer = new DataContractSerializer(typeof(T));
+            using (FileStream reader = new FileStream(filename,FileMode.Open))
             {
-                data = (T)serializer.Deserialize(reader);
+                data = (T)serializer.ReadObject(reader);
                 if (version == data.Version)
                 {
                     return data;
@@ -129,7 +170,13 @@ namespace MySerializer.Models
             throw new Exception("Несоответствие версий");
         }
 
-        private static T DeserializeInTextFileByJsonFormat(string filename,Version version)
+        /// <summary>
+        /// Json deserializing method
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
+        private static T DeserializeInJsonFile(string filename,Version version)
         {
             dynamic data = null;
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));

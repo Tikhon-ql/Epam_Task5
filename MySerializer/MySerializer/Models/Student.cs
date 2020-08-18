@@ -13,9 +13,13 @@ namespace MySerializer.Models
     [DataContract]
     public class Student : IVersionHaver, ISerialize
     {
+        [DataMember]
         public string Surname { get; set; }
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public int Age { get; set; }
+        [DataMember]
         public Version Version { get; set; } = new Version("1.0.0.0");
         public Student() { }
         public Student(string surname,string name,int age)

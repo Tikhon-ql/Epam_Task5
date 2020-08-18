@@ -58,16 +58,16 @@ namespace _MySerializer.Tests
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Data_For_Student_Serialize_In_Text_File_By_Json_Format_Method),DynamicDataSourceType.Method)]
-        public void Serialize_Student_In_Text_File_By_Json_Format(Student student)
+        [DynamicData(nameof(Data_For_Student_Serialize_In_Json_File_Method),DynamicDataSourceType.Method)]
+        public void Serialize_Student_In_Json_File(Student student)
         {
             //act
-            bool actual = Serializer<Student>.Serialize(student, "textjson.txt", SerializeType.TextFileByJsonFormat);
+            bool actual = Serializer<Student>.Serialize(student, "textjson.json", SerializeType.JsonFile);
             //assert
             Assert.IsTrue(actual);
         }
 
-        public static IEnumerable<Student[]> Data_For_Student_Serialize_In_Text_File_By_Json_Format_Method()
+        public static IEnumerable<Student[]> Data_For_Student_Serialize_In_Json_File_Method()
         {
             return new[]
             {
@@ -128,13 +128,13 @@ namespace _MySerializer.Tests
 
 
         [TestMethod]
-        public void Deserialize_Student_From_Text_File_By_Json()
+        public void Deserialize_Student_From_Json_File()
         {
             //arrange
             Student expected = new Student("Петров", "Петр", 19);
 
             //act
-            Student actual = Serializer<Student>.Deserialize("textjson.txt", Version.Parse("1.0.0.0"), SerializeType.TextFileByJsonFormat);
+            Student actual = Serializer<Student>.Deserialize("textjson.json", Version.Parse("1.0.0.0"), SerializeType.JsonFile);
 
             //assert
 
@@ -189,16 +189,16 @@ namespace _MySerializer.Tests
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Data_For_StudentList_Serialize_In_Text_File_By_Json_Format_Method), DynamicDataSourceType.Method)]
-        public void Serialize_StudentList_In_Text_File_By_Json_Format_File(StudentsList student)
+        [DynamicData(nameof(Data_For_StudentList_Serialize_In_Json_File_Method), DynamicDataSourceType.Method)]
+        public void Serialize_StudentList_In_Json_File(StudentsList student)
         {
             //act
-            bool actual = Serializer<StudentsList>.Serialize(student, "textjsonList.txt", SerializeType.TextFileByJsonFormat);
+            bool actual = Serializer<StudentsList>.Serialize(student, "textjsonList.json", SerializeType.JsonFile);
             //assert
             Assert.IsTrue(actual);
         }
 
-        public static IEnumerable<StudentsList[]> Data_For_StudentList_Serialize_In_Text_File_By_Json_Format_Method()
+        public static IEnumerable<StudentsList[]> Data_For_StudentList_Serialize_In_Json_File_Method()
         {
             return new[]
             {
@@ -258,13 +258,13 @@ namespace _MySerializer.Tests
 
 
         [TestMethod]
-        public void Deserialize_StudentList_From_Text_File_By_Json()
+        public void Deserialize_StudentList_From_Json_File()
         {
             //arrange
             StudentsList expected = new StudentsList(new Student("Петров", "Петр", 19), new Student("Борисов", "Борис", 18));
 
             //act
-            StudentsList actual = Serializer<StudentsList>.Deserialize("xmlfileList.xml", Version.Parse("1.0.0.0"), SerializeType.TextFileByJsonFormat);
+            StudentsList actual = Serializer<StudentsList>.Deserialize("textjsonList.json", Version.Parse("1.0.0.0"), SerializeType.JsonFile);
 
             //assert
             
