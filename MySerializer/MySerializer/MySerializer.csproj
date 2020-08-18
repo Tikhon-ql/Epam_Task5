@@ -50,11 +50,19 @@
     <Compile Include="Interfaces\ISerialize.cs" />
     <Compile Include="Models\Serializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Student.cs" />
-    <Compile Include="Resources\StudentsList.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentsList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\binary.dat" />
+    <None Include="Resources\binaryList.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\textjson.txt" />
+    <Content Include="Resources\textjsonList.txt" />
+    <Content Include="Resources\xmlfile.xml" />
+    <Content Include="Resources\xmlfileList.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

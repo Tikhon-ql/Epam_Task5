@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySerializer.Resources
+namespace MySerializer.Models
 {
     [Serializable]
     public class StudentsList : IVersionHaver, ICollection<Student>,ISerialize

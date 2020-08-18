@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySerializer.Resources
+namespace MySerializer.Models
 {
     [Serializable]
     [DataContract]

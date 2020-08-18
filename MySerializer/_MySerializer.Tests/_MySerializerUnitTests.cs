@@ -4,7 +4,6 @@ using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySerializer.Enums;
 using MySerializer.Models;
-using MySerializer.Resources;
 
 namespace _MySerializer.Tests
 {
