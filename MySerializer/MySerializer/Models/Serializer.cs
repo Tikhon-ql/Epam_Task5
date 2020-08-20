@@ -58,7 +58,7 @@ namespace MySerializer.Models
         private static void SerializeInBinaryFile(T data, string filename)
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
+            using (FileStream stream = new FileStream(filename, FileMode.Create,FileAccess.Write))
             {
                 formatter.Serialize(stream, data);
             }
@@ -78,7 +78,7 @@ namespace MySerializer.Models
             //    serializer.Serialize(writer, data);
             //}
             DataContractSerializer serializer = new DataContractSerializer(typeof(T));
-            using (FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
+            using (FileStream stream = new FileStream(filename, FileMode.Create,FileAccess.Write))
             {
                 serializer.WriteObject(stream, data);
             }
@@ -93,7 +93,7 @@ namespace MySerializer.Models
         private static void SerializeInJsonFile(T data, string filename)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-            using(FileStream stream = new FileStream(filename, FileMode.OpenOrCreate))
+            using (FileStream stream = new FileStream(filename, FileMode.Create,FileAccess.Write))
             {
                 serializer.WriteObject(stream, data);
             }
@@ -180,7 +180,7 @@ namespace MySerializer.Models
         {
             dynamic data = null;
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-            using (FileStream stream = new FileStream(filename,FileMode.Open))
+            using (FileStream stream = new FileStream(filename, FileMode.Open))
             {
                 data = (T)serializer.ReadObject(stream);
                 if (version == data.Version)

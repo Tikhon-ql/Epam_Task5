@@ -20,13 +20,18 @@ namespace MySerializer.Models
         [DataMember]
         public int Age { get; set; }
         [DataMember]
-        public Version Version { get; set; } = new Version("1.0.0.0");
-        public Student() { }
+        public Version Version { get; set; }
+        public Student()
+        {
+             Version = new Version("1.0.0.0");
+        }
         public Student(string surname,string name,int age)
         {
             Surname = surname;
             Name = name;
             Age = age;
+
+            Version = new Version("1.0.0.0");
         }
         public override string ToString()
         {

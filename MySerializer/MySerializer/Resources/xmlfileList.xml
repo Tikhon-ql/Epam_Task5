@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Student>
-    <Surname>Петров</Surname>
-    <Name>Петр</Name>
-    <Age>19</Age>
-    <Version />
-  </Student>
-  <Student>
-    <Surname>Борисов</Surname>
-    <Name>Борис</Name>
-    <Age>18</Age>
-    <Version />
-  </Student>
-</ArrayOfStudent>
+<StudentsList xmlns="http://schemas.datacontract.org/2004/07/MySerializer.Models" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Version xmlns:a="http://schemas.datacontract.org/2004/07/System"><a:_Build>0</a:_Build><a:_Major>1</a:_Major><a:_Minor>0</a:_Minor><a:_Revision>0</a:_Revision></Version><students><Student><Age>19</Age><Name>Петр</Name><Surname>Петров</Surname><Version xmlns:a="http://schemas.datacontract.org/2004/07/System"><a:_Build>0</a:_Build><a:_Major>1</a:_Major><a:_Minor>0</a:_Minor><a:_Revision>0</a:_Revision></Version></Student><Student><Age>18</Age><Name>Борис</Name><Surname>Борисов</Surname><Version xmlns:a="http://schemas.datacontract.org/2004/07/System"><a:_Build>0</a:_Build><a:_Major>1</a:_Major><a:_Minor>0</a:_Minor><a:_Revision>0</a:_Revision></Version></Student></students></StudentsList>

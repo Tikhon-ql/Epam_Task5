@@ -20,18 +20,25 @@ namespace MySerializer.Models
 
         public bool IsReadOnly => false;
         [DataMember]
-        public Version Version { get; set; } = new Version("1.0.0.0");
+        public Version Version { get; set; }
 
         public void Add(Student item)
         {
             students.Add(item);
         }
+
+        public StudentsList()
+        {
+            Version = new Version("1.0.0.0");
+        }
+
         public StudentsList(params Student[] students)
         {
             foreach(Student item in students)
             {
                 this.Add(item);
             }
+            Version = new Version("1.0.0.0");
         }
         public void Clear()
         {

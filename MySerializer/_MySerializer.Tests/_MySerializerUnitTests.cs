@@ -10,9 +10,10 @@ namespace _MySerializer.Tests
     [TestClass]
     public class _MySerializerUnitTests
     {
-
-
-
+        /// <summary>
+        /// Checking object's serialization in binary file method
+        /// </summary>
+        /// <param name="student"></param>
         [DataTestMethod]
         [DynamicData(nameof(Data_For_Student_Serialize_In_Binary_File_Method),DynamicDataSourceType.Method)]
         public void Serialize_Student_In_Binary_File(Student student)
@@ -22,7 +23,10 @@ namespace _MySerializer.Tests
             //assert
             Assert.IsTrue(actual);
         }
-
+        /// <summary>
+        /// Data for checking serialization in binary file method
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<Student[]> Data_For_Student_Serialize_In_Binary_File_Method()
         {
             return new[]
@@ -33,7 +37,10 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's serialization in xml file method
+        /// </summary>
+        /// <param name="student"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_Student_Serialize_In_Xml_File_Method),DynamicDataSourceType.Method)]
@@ -45,6 +52,11 @@ namespace _MySerializer.Tests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Data for checking serialization in xml file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<Student[]> Data_For_Student_Serialize_In_Xml_File_Method()
         {
             return new[]
@@ -55,7 +67,10 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's serialization in json file method
+        /// </summary>
+        /// <param name="student"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_Student_Serialize_In_Json_File_Method),DynamicDataSourceType.Method)]
@@ -67,6 +82,11 @@ namespace _MySerializer.Tests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Data for checking serialization in json file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<Student[]> Data_For_Student_Serialize_In_Json_File_Method()
         {
             return new[]
@@ -77,7 +97,10 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's deserialization from binary file method
+        /// </summary>
+        /// <param name="currVersion"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_Student_Deserialize_From_Binary_File), DynamicDataSourceType.Method)]
@@ -99,6 +122,11 @@ namespace _MySerializer.Tests
               
         }
 
+        /// <summary>
+        /// Data for checking deserialization from binary file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<Version[]> Data_For_Student_Deserialize_From_Binary_File()
         {
             return new[]
@@ -109,7 +137,9 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's deserialization from xml file method
+        /// </summary>
 
         [TestMethod]
         public void Deserialize_Student_From_Xml_File()
@@ -125,7 +155,9 @@ namespace _MySerializer.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
+        /// <summary>
+        /// Checking object's deserialization from json file method
+        /// </summary>
 
         [TestMethod]
         public void Deserialize_Student_From_Json_File()
@@ -141,7 +173,10 @@ namespace _MySerializer.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
+        /// <summary>
+        /// Checking object's list serialization in binary file method
+        /// </summary>
+        /// <param name="student"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_StudentList_Serialize_In_Binary_File_Method), DynamicDataSourceType.Method)]
@@ -153,6 +188,11 @@ namespace _MySerializer.Tests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Data for checking serialization object's list in binary file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<StudentsList[]> Data_For_StudentList_Serialize_In_Binary_File_Method()
         {
             return new[]
@@ -163,7 +203,10 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's list serialization in xml file method
+        /// </summary>
+        /// <param name="student"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_StudentList_Serialize_In_Xml_File_Method), DynamicDataSourceType.Method)]
@@ -174,6 +217,11 @@ namespace _MySerializer.Tests
             //assert
             Assert.IsTrue(actual);
         }
+
+        /// <summary>
+        /// Data for checking serialization object's list in xml file method
+        /// </summary>
+        /// <returns></returns>
 
         public static IEnumerable<StudentsList[]> Data_For_StudentList_Serialize_In_Xml_File_Method()
         {
@@ -186,7 +234,10 @@ namespace _MySerializer.Tests
         }
 
 
-
+        /// <summary>
+        /// Checking object's list serialization in json file method
+        /// </summary>
+        /// <param name="student"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_StudentList_Serialize_In_Json_File_Method), DynamicDataSourceType.Method)]
@@ -198,6 +249,11 @@ namespace _MySerializer.Tests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Data for checking serialization object's list in json file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<StudentsList[]> Data_For_StudentList_Serialize_In_Json_File_Method()
         {
             return new[]
@@ -208,6 +264,10 @@ namespace _MySerializer.Tests
             };
         }
 
+        /// <summary>
+        /// Checking object's list deserialization from binary file method
+        /// </summary>
+        /// <param name="currVersion"></param>
 
         [DataTestMethod]
         [DynamicData(nameof(Data_For_StudentList_Deserialize_From_Binary_File), DynamicDataSourceType.Method)]
@@ -229,6 +289,11 @@ namespace _MySerializer.Tests
 
         }
 
+        /// <summary>
+        /// Data for checking deserialization from binary file method
+        /// </summary>
+        /// <returns></returns>
+
         public static IEnumerable<Version[]> Data_For_StudentList_Deserialize_From_Binary_File()
         {
             return new[]
@@ -239,7 +304,9 @@ namespace _MySerializer.Tests
             };
         }
 
-
+        /// <summary>
+        /// Checking object's list deserialization from xml file method
+        /// </summary>
 
         [TestMethod]
         public void Deserialize_StudentList_From_Xml_File()
@@ -255,7 +322,9 @@ namespace _MySerializer.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
+        /// <summary>
+        /// Checking object's list deserialization from json file method
+        /// </summary>
 
         [TestMethod]
         public void Deserialize_StudentList_From_Json_File()
